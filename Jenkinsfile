@@ -4,9 +4,12 @@ pipeline {
   //gitParameter branch: '', branchFilter: '.*', defaultValue: 'pprd', description: 'Branch to select', name: 'BRANCH', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'ASCENDING_SMART', tagFilter: '*', type: 'PT_BRANCH'
   //gitParameter branch: '', branchFilter: '.*', defaultValue: '1.0', description: 'Tag to build', name: 'GIT_TAG', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'ASCENDING_SMART', tagFilter: '*', type: 'PT_TAG'
   //}
+  //parameters {
+  //gitParameter branch: '', branchFilter: '.*', defaultValue: 'master', description: 'Branch to select', listSize: '10', name: 'BRANCH', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'ASCENDING_SMART', tagFilter: '*', type: 'PT_BRANCH'
+   //}
   parameters {
-  gitParameter branch: '', branchFilter: '.*', defaultValue: 'master', description: 'Branch to select', listSize: '10', name: 'BRANCH', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'ASCENDING_SMART', tagFilter: '*', type: 'PT_BRANCH'
-   }
+  gitParameter branch: '$BRANCH', branchFilter: 'git ls-remote -t https://github.com/sampledevops478/cloudfreak.git "*"', defaultValue: 'v1.0', description: 'TAG to Build', listSize: '10', name: 'TAG', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'ASCENDING_SMART', tagFilter: '*', type: 'PT_BRANCH_TAG', useRepository: 'https://github.com/sampledevops478/cloudfreak.git'
+  } 	
     tools {
       maven 'maven3'
                  jdk 'JDK8'
