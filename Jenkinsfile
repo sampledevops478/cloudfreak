@@ -14,7 +14,8 @@ pipeline {
     stages {
         stage('clone'){
 		    steps {
-			  checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/sampledevops478/cloudfreak.git', credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db' ]]]
+			  //checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/sampledevops478/cloudfreak.git', credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db' ]]]
+			    checkout([$class: 'GitSCM', branches: [[name: '${BRANCH}']], extensions: [], userRemoteConfigs: [[credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db', url: 'https://github.com/sampledevops478/cloudfreak.git']]])
 			}
         }
         stage('Build maven') {
