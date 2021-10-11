@@ -9,6 +9,7 @@ pipeline {
    //}
   parameters {
   gitParameter branch: '$BRANCH', branchFilter: '.*', defaultValue: 'v1.0', description: 'TAG to Build', listSize: '10', name: 'TAG', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'ASCENDING_SMART', tagFilter: 'git ls-remote -t https://github.com/sampledevops478/cloudfreak.git "*"', type: 'PT_BRANCH_TAG', useRepository: 'https://github.com/sampledevops478/cloudfreak.git'
+  string(name: 'GIT_TAG', defaultValue: 'v2.0', description: 'Select tag release version')	  
   }	
       tools {
       maven 'maven3'
@@ -18,7 +19,8 @@ pipeline {
         stage('clone'){
 		    steps {
 			  //checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/sampledevops478/cloudfreak.git', credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db' ]]]
-			    checkout([$class: 'GitSCM', branches: [[name: '${BRANCH}']], extensions: [], userRemoteConfigs: [[credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db', url: 'https://github.com/sampledevops478/cloudfreak.git']]])
+			  //checkout([$class: 'GitSCM', branches: [[name: '${BRANCH}']], extensions: [], userRemoteConfigs: [[credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db', url: 'https://github.com/sampledevops478/cloudfreak.git']]])
+                          checkout([$class: 'GitSCM', branches: [[name: '+refs/heads/*:refs/remotes/$BRANCH +refs/tags/*:refs/tags/$GIT_TAG']], extensions: [], userRemoteConfigs: [[credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db', url: 'https://github.com/sampledevops478/cloudfreak.git']]]) 			    
 			}
         }
         stage('Build maven') {
