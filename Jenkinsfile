@@ -5,7 +5,8 @@ pipeline {
   //gitParameter branch: '', branchFilter: '.*', defaultValue: '1.0', description: 'Tag to build', name: 'GIT_TAG', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'ASCENDING_SMART', tagFilter: '*', type: 'PT_TAG'
   //}
   parameters {
-  gitParameter branch: '', branchFilter: '.*', defaultValue: 'master', description: 'branch to select', name: 'BRANCH', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH'
+  gitParameter branch: '', branchFilter: '.*', defaultValue: 'origin/master', description: 'Select branch from below drop down list', name: 'BRANCH', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', type: 'PT_BRANCH'
+  string defaultValue: '1.0', description: 'Git tag release version to build', name: 'GIT_TAG', trim: false
   }	
     tools {
       maven 'maven3'
