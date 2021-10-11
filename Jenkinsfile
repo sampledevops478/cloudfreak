@@ -14,7 +14,7 @@ pipeline {
 			 script {
 			   // Let's clone the source
 			   //git credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db', url: 'https://github.com/devops478/cloudfreak.git'
-			   checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/sampledevops478/cloudfreak.git', credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db' ]], branches: [[name: '+refs/heads/${params.BRANCH}:refs/remotes/${params.BRANCH}" +refs/tags/*:refs/tags/v${params.GIT_TAG}']]]
+			   checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/sampledevops478/cloudfreak.git', credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db' ]], branches: [[name: '+refs/heads/${BRANCH}:refs/remotes/${BRANCH}" +refs/tags/*:refs/tags/v${params.GIT_TAG}']]]
 			 }
 			}
         }
