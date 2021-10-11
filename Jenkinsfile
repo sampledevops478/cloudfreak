@@ -20,7 +20,7 @@ pipeline {
 		    steps {
 			  //checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/sampledevops478/cloudfreak.git', credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db' ]]]
 			  //checkout([$class: 'GitSCM', branches: [[name: '${BRANCH}']], extensions: [], userRemoteConfigs: [[credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db', url: 'https://github.com/sampledevops478/cloudfreak.git']]])
-                          checkout([$class: 'GitSCM', branches: [[name: '+refs/heads/*:refs/remotes/$BRANCH +refs/tags/*:refs/tags/$GIT_TAG']], extensions: [], userRemoteConfigs: [[credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db', url: 'https://github.com/sampledevops478/cloudfreak.git']]]) 			    
+                          checkout([$class: 'GitSCM', branches: [[name: '+refs/heads/*:refs/remotes/$BRANCH +refs/tags/*:refs/tags/${params.GIT_TAG}']], extensions: [], userRemoteConfigs: [[credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db', url: 'https://github.com/sampledevops478/cloudfreak.git']]]) 			    
 			}
         }
         stage('Build maven') {
