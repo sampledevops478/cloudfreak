@@ -37,7 +37,7 @@ pipeline {
                script {
                  // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
 				 pom = readMavenPom file: "pom.xml";
-                 def customImage = docker.build('444078758910.dkr.ecr.us-east-1.amazonaws.com/ull-docker-images', "./docker")
+                 def customImage = docker.build('444078758910.dkr.ecr.us-east-1.amazonaws.com/ull-docker-images' + ":v${pom.version}",', "./docker")
                  docker.withRegistry('https://444078758910.dkr.ecr.us-east-1.amazonaws.com/', 'ecr:us-east-1:ecr-cred') {
                  customImage.push("v${pom.version}")
                  }                     
