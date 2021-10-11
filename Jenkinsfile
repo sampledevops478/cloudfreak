@@ -1,7 +1,7 @@
 pipeline {
   agent any
   parameters {
-  gitParameter branch: '', branchFilter: '.*', defaultValue: 'origin/master', description: 'Select branch from below drop down list', name: 'BRANCH', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', type: 'PT_BRANCH'
+  gitParameter branch: '', branchFilter: '.*', defaultValue: 'origin/master', description: 'Select branch from below drop down list', name: 'BRANCH', quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH'
   string defaultValue: '1.0', description: 'Git tag release version to build', name: 'GIT_TAG', trim: false
   }
     tools {
@@ -14,7 +14,7 @@ pipeline {
 			 script {
 			   // Let's clone the source
 			   //git credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db', url: 'https://github.com/devops478/cloudfreak.git'
-			   checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/sampledevops478/cloudfreak.git', credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db' ]], branches: [[name: '+refs/heads/*:refs/remotes/${params.BRANCH} +refs/tags/*:refs/tags/v${params.GIT_TAG}']]]
+			   checkout scm: [$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/sampledevops478/cloudfreak.git', credentialsId: '976c8a11-ab25-4ef8-9344-39d3de2f67db' ]], branches: [[name: '+refs/heads/*:refs/remotes/${BRANCH} +refs/tags/*:refs/tags/v${params.GIT_TAG}']]]
 			 }
 			}
         }
